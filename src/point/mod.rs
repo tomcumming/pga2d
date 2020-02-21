@@ -2,6 +2,7 @@ pub mod direction;
 pub mod unitdirection;
 pub mod unitpoint;
 
+use super::line::Line;
 use super::Scalar;
 use direction::Direction;
 
@@ -62,6 +63,28 @@ impl super::Inner<Point> for Point {
 
     fn inner(self, rhs: Point) -> Scalar {
         -self.e12 * rhs.e12
+    }
+}
+
+impl super::Dual for Point {
+    type Output = Line;
+
+    fn dual(self) -> Line {
+        Line {
+            e0: self.e12,
+            e1: self.e20,
+            e2: self.e01,
+        }
+    }
+}
+
+impl super::Join<Point> for Point {
+    type Output = Line;
+
+    fn join(self, rhs: Point) -> Line {
+        use crate::{Dual, Meet};
+
+        self.dual().meet(rhs.dual()).dual()
     }
 }
 

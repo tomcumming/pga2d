@@ -46,6 +46,25 @@ impl std::ops::Add<Direction> for Point {
     }
 }
 
+impl super::Meet<Point> for Point {
+    type Output = Direction;
+
+    fn meet(self, rhs: Point) -> Direction {
+        Direction {
+            e01: self.e20 * rhs.e12 + -self.e12 * rhs.e20,
+            e20: -self.e01 * rhs.e20 + self.e12 * rhs.e01,
+        }
+    }
+}
+
+impl super::Inner<Point> for Point {
+    type Output = Scalar;
+
+    fn inner(self, rhs: Point) -> Scalar {
+        -self.e12 * rhs.e12
+    }
+}
+
 impl Point {
     fn euc_norm(&self) -> Scalar {
         Scalar::abs(self.e12)

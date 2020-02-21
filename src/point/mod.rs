@@ -90,7 +90,7 @@ impl super::Join<Point> for Point {
 
 impl Point {
     fn euc_norm(&self) -> Scalar {
-        Scalar::abs(self.e12)
+        self.e12
     }
 
     fn ideal_norm(&self) -> Scalar {

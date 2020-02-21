@@ -42,7 +42,7 @@ impl super::Dual for Line {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::point::unitpoint::UnitPoint;
+    use crate::point::unit::UnitPoint;
     use crate::point::Point;
     use crate::Meet;
     use std::convert::TryFrom;

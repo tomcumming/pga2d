@@ -1,6 +1,6 @@
 pub mod direction;
+pub mod unit;
 pub mod unitdirection;
-pub mod unitpoint;
 
 use super::line::Line;
 use super::Scalar;

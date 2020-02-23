@@ -33,3 +33,9 @@ impl From<PseudoScalar> for Scalar {
         ps.e012
     }
 }
+
+impl PseudoScalar {
+    pub fn ideal_norm(self) -> Scalar {
+        self.e012
+    }
+}

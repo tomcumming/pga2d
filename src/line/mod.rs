@@ -59,6 +59,18 @@ impl super::Inner<Line> for Line {
     }
 }
 
+impl super::Inner<Point> for Line {
+    type Output = Line;
+
+    fn inner(self, p: Point) -> Line {
+        Line {
+            e0: -self.e1 * p.e01 + self.e2 * p.e20,
+            e1: -self.e2 * p.e12,
+            e2: self.e1 * p.e12,
+        }
+    }
+}
+
 impl super::Dual for Line {
     type Output = Point;
 
@@ -90,7 +102,7 @@ mod tests {
     use super::*;
     use crate::point::unit::UnitPoint;
     use crate::point::Point;
-    use crate::Meet;
+    use crate::{Inner, Meet};
     use std::convert::TryFrom;
 
     #[test]
@@ -132,5 +144,28 @@ mod tests {
         let expected = 2f32 * 7f32 + 3f32 * 6f32 + 4f32 * 5f32;
         assert_eq!(Scalar::from(l.meet(p)), expected);
         assert_eq!(Scalar::from(p.meet(l)), expected);
+    }
+
+    #[test]
+    fn test_line_inner_point_simple_example() {
+        let l = Line {
+            e0: 2f32,
+            e1: 3f32,
+            e2: 4f32,
+        };
+        let p = Point {
+            e01: 5f32,
+            e20: 6f32,
+            e12: 7f32,
+        };
+        let expected = Line {
+            e0: -3f32 * 5f32 + 4f32 * 6f32,
+            e1: -4f32 * 7f32,
+            e2: 3f32 * 7f32,
+        };
+        let actual = l.inner(p);
+        assert_eq!(expected.e0, actual.e0);
+        assert_eq!(expected.e1, actual.e1);
+        assert_eq!(expected.e2, actual.e2);
     }
 }

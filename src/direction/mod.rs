@@ -17,6 +17,14 @@ impl std::ops::Mul<Scalar> for Direction {
     }
 }
 
+impl std::ops::Mul<Direction> for Scalar {
+    type Output = Direction;
+
+    fn mul(self, d: Direction) -> Direction {
+        d * self
+    }
+}
+
 impl std::ops::Add<Direction> for Direction {
     type Output = Direction;
 

@@ -22,6 +22,14 @@ impl std::ops::Mul<Scalar> for Line {
     }
 }
 
+impl std::ops::Mul<Line> for Scalar {
+    type Output = Line;
+
+    fn mul(self, l: Line) -> Line {
+        l * self
+    }
+}
+
 impl super::Meet<Line> for Line {
     type Output = Point;
 

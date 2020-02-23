@@ -33,6 +33,14 @@ impl std::ops::Mul<Scalar> for Point {
     }
 }
 
+impl std::ops::Mul<Point> for Scalar {
+    type Output = Point;
+
+    fn mul(self, p: Point) -> Point {
+        p * self
+    }
+}
+
 impl std::ops::Add<Direction> for Point {
     type Output = Point;
 

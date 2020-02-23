@@ -47,6 +47,14 @@ impl std::ops::Mul<Scalar> for UnitPoint {
     }
 }
 
+impl std::ops::Mul<UnitPoint> for Scalar {
+    type Output = UnitPoint;
+
+    fn mul(self, up: UnitPoint) -> UnitPoint {
+        up * self
+    }
+}
+
 impl std::ops::Add<UnitPoint> for UnitPoint {
     type Output = UnitPoint;
 

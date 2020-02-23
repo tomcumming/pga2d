@@ -1,4 +1,4 @@
-use super::Scalar;
+use crate::Scalar;
 
 #[derive(Debug, Copy, Clone)]
 pub struct Direction {

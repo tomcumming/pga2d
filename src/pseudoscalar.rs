@@ -1,4 +1,4 @@
-use super::Scalar;
+use crate::Scalar;
 
 pub struct PseudoScalar {
     pub e012: Scalar,

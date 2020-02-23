@@ -1,10 +1,8 @@
-pub mod direction;
 pub mod unit;
-pub mod unitdirection;
 
-use super::line::Line;
-use super::Scalar;
-use direction::Direction;
+use crate::direction::Direction;
+use crate::line::Line;
+use crate::Scalar;
 
 #[derive(Debug, Copy, Clone)]
 pub struct Point {
@@ -89,15 +87,15 @@ impl super::Join<Point> for Point {
 }
 
 impl Point {
-    fn euc_norm(&self) -> Scalar {
+    pub fn euc_norm(&self) -> Scalar {
         self.e12
     }
 
-    fn ideal_norm(&self) -> Scalar {
+    pub fn ideal_norm(&self) -> Scalar {
         Scalar::sqrt(self.e20.powi(2) + self.e01.powi(2))
     }
 
-    fn is_finite(&self) -> bool {
+    pub fn is_finite(&self) -> bool {
         self.e01.is_finite() && self.e20.is_finite() && self.e12.is_finite()
     }
 }

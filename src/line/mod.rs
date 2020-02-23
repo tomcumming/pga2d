@@ -1,7 +1,7 @@
 pub mod unit;
 
-use super::point::Point;
-use super::Scalar;
+use crate::point::Point;
+use crate::Scalar;
 
 #[derive(Debug, Copy, Clone)]
 pub struct Line {

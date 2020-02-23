@@ -1,8 +1,8 @@
 use std::convert::TryFrom;
 
-use super::direction::Direction;
 use super::Point;
-use super::Scalar;
+use crate::direction::Direction;
+use crate::Scalar;
 
 #[derive(Debug, Copy, Clone)]
 pub struct UnitPoint {

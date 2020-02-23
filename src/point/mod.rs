@@ -2,6 +2,7 @@ pub mod unit;
 
 use crate::direction::Direction;
 use crate::line::Line;
+use crate::pseudoscalar::PseudoScalar;
 use crate::Scalar;
 
 #[derive(Debug, Copy, Clone)]
@@ -61,6 +62,14 @@ impl super::Meet<Point> for Point {
             e01: self.e20 * rhs.e12 + -self.e12 * rhs.e20,
             e20: -self.e01 * rhs.e20 + self.e12 * rhs.e01,
         }
+    }
+}
+
+impl super::Meet<Line> for Point {
+    type Output = PseudoScalar;
+
+    fn meet(self, l: Line) -> PseudoScalar {
+        l.meet(self)
     }
 }
 

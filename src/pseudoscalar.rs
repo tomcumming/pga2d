@@ -27,3 +27,9 @@ impl From<Scalar> for PseudoScalar {
         PseudoScalar { e012: s }
     }
 }
+
+impl From<PseudoScalar> for Scalar {
+    fn from(ps: PseudoScalar) -> Scalar {
+        ps.e012
+    }
+}

@@ -1,6 +1,7 @@
 pub mod unit;
 
 use crate::point::Point;
+use crate::pseudoscalar::PseudoScalar;
 use crate::Scalar;
 
 #[derive(Debug, Copy, Clone)]
@@ -39,6 +40,14 @@ impl super::Meet<Line> for Line {
             e20: -self.e0 * rhs.e2 + self.e2 * rhs.e0,
             e12: self.e1 * rhs.e2 + -self.e2 * rhs.e1,
         }
+    }
+}
+
+impl super::Meet<Point> for Line {
+    type Output = PseudoScalar;
+
+    fn meet(self, p: Point) -> PseudoScalar {
+        PseudoScalar::from(self.e0 * p.e12 + self.e1 * p.e20 + self.e2 * p.e01)
     }
 }
 
@@ -106,5 +115,22 @@ mod tests {
         // Should intersect at (2, 1)
         assert_eq!(p.e20, 2f32);
         assert_eq!(p.e01, 1f32);
+    }
+
+    #[test]
+    fn test_line_point_meet_simple_example() {
+        let l = Line {
+            e0: 2f32,
+            e1: 3f32,
+            e2: 4f32,
+        };
+        let p = Point {
+            e01: 5f32,
+            e20: 6f32,
+            e12: 7f32,
+        };
+        let expected = 2f32 * 7f32 + 3f32 * 6f32 + 4f32 * 5f32;
+        assert_eq!(Scalar::from(l.meet(p)), expected);
+        assert_eq!(Scalar::from(p.meet(l)), expected);
     }
 }

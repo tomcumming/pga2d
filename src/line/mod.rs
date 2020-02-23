@@ -1,10 +1,25 @@
+pub mod unit;
+
 use super::point::Point;
 use super::Scalar;
 
+#[derive(Debug, Copy, Clone)]
 pub struct Line {
     pub e0: Scalar,
     pub e1: Scalar,
     pub e2: Scalar,
+}
+
+impl std::ops::Mul<Scalar> for Line {
+    type Output = Line;
+
+    fn mul(self, s: Scalar) -> Line {
+        Line {
+            e0: self.e0 * s,
+            e1: self.e1 * s,
+            e2: self.e2 * s,
+        }
+    }
 }
 
 impl super::Meet<Line> for Line {
@@ -36,6 +51,20 @@ impl super::Dual for Line {
             e20: self.e1,
             e12: self.e0,
         }
+    }
+}
+
+impl Line {
+    pub fn is_finite(self) -> bool {
+        self.e0.is_finite() && self.e1.is_finite() && self.e2.is_finite()
+    }
+
+    pub fn euc_norm(self) -> Scalar {
+        Scalar::sqrt(Scalar::powi(self.e1, 2) + Scalar::powi(self.e2, 2))
+    }
+
+    pub fn ideal_norm(self) -> Scalar {
+        self.e0
     }
 }
 

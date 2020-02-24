@@ -1,8 +1,9 @@
 use std::convert::TryFrom;
 
-use super::direction::Direction;
-use crate::Point;
+use super::Direction;
+use crate::point::Point;
 
+/// Unit direction with an ideal norm of 1
 #[derive(Debug, Copy, Clone)]
 pub struct UnitDirection(Direction);
 

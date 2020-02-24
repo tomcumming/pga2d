@@ -2,6 +2,7 @@ use std::convert::TryFrom;
 
 use super::Line;
 
+/// A line with a euclidian norm of 1
 pub struct UnitLine(Line);
 
 impl TryFrom<Line> for UnitLine {

@@ -4,6 +4,7 @@ use crate::point::Point;
 use crate::pseudoscalar::PseudoScalar;
 use crate::Scalar;
 
+/// Grade-1 blade
 #[derive(Debug, Copy, Clone)]
 pub struct Line {
     pub e0: Scalar,

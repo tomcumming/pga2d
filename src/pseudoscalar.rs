@@ -2,6 +2,7 @@ use std::ops::Mul;
 
 use crate::Scalar;
 
+/// Grade-3 blade, also known as I
 pub struct PseudoScalar {
     pub e012: Scalar,
 }

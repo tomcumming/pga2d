@@ -4,6 +4,7 @@ use super::Point;
 use crate::direction::Direction;
 use crate::Scalar;
 
+/// A unit point has a weight of 1
 #[derive(Debug, Copy, Clone)]
 pub struct UnitPoint {
     e01: Scalar,

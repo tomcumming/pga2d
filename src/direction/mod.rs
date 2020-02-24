@@ -1,5 +1,8 @@
+pub mod unit;
+
 use crate::Scalar;
 
+/// `Direction`s are `Point`s with zero weight
 #[derive(Debug, Copy, Clone)]
 pub struct Direction {
     pub e01: Scalar,

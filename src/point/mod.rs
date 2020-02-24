@@ -71,6 +71,18 @@ impl super::Inner<Point> for Point {
     }
 }
 
+impl super::Inner<Line> for Point {
+    type Output = Line;
+
+    fn inner(self, l: Line) -> Line {
+        Line {
+            e0: self.e01 * l.e1 + -self.e20 * l.e2,
+            e1: self.e12 * l.e2,
+            e2: -self.e12 * l.e1,
+        }
+    }
+}
+
 impl super::Dual for Point {
     type Output = Line;
 
@@ -104,5 +116,35 @@ impl Point {
 
     pub fn is_finite(&self) -> bool {
         self.e01.is_finite() && self.e20.is_finite() && self.e12.is_finite()
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use crate::line::Line;
+    use crate::Inner;
+
+    #[test]
+    fn point_line_inner_simple_example() {
+        let p = Point {
+            e01: 2f32,
+            e20: 3f32,
+            e12: 4f32,
+        };
+        let l = Line {
+            e0: 5f32,
+            e1: 6f32,
+            e2: 7f32,
+        };
+        let expected = Line {
+            e0: 2f32 * 6f32 + -3f32 * 7f32,
+            e1: 4f32 * 7f32,
+            e2: -4f32 * 6f32,
+        };
+        let actual = p.inner(l);
+        assert_eq!(actual.e0, expected.e0);
+        assert_eq!(actual.e1, expected.e1);
+        assert_eq!(actual.e2, expected.e2);
     }
 }

@@ -54,17 +54,6 @@ impl std::ops::Add<Direction> for Point {
     }
 }
 
-impl super::Meet<Point> for Point {
-    type Output = Direction;
-
-    fn meet(self, rhs: Point) -> Direction {
-        Direction {
-            e01: self.e20 * rhs.e12 + -self.e12 * rhs.e20,
-            e20: -self.e01 * rhs.e20 + self.e12 * rhs.e01,
-        }
-    }
-}
-
 impl super::Meet<Line> for Point {
     type Output = PseudoScalar;
 
